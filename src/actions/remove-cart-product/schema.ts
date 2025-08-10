@@ -1,7 +1,5 @@
-import z from "zod";
-
-import CartItem from "@/components/common/cart-item";
+import { z } from "zod";
 
 export const removeProductFromCartSchema = z.object({
-  CartItemId: z.uuid(),
+  cartItemId: z.uuid(),
 });

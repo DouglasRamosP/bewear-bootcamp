@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button";
 
 import AddToCartButton from "./add-to-cart-button";
 
-
 interface ProductActionsProps {
   productVariantId: string;
 }

@@ -597,19 +597,6 @@ async function main() {
             variantData.color as keyof (typeof productImages)[typeof productKey]
           ] || [];
 
-        // 🛠️ Correção: remove chaves {} extras de URLs salvas incorretamente
-        let rawUrl: string = "";
-
-        if (Array.isArray(variantImages)) {
-          rawUrl = variantImages[0];
-        } else if (typeof variantImages === "string") {
-          rawUrl = variantImages;
-        }
-
-        // Se a URL vier com { } no formato '{"url"}', remove essas chaves
-        if (rawUrl.startsWith("{") && rawUrl.endsWith("}")) {
-          rawUrl = rawUrl.slice(1, -1);
-        }
         console.log(`  🎨 Criando variante: ${variantData.color}`);
 
         await db.insert(productVariantTable).values({
