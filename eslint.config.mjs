@@ -10,8 +10,19 @@ const compat = new FlatCompat({
   baseDirectory: __dirname,
 });
 
-const eslintConfig = [
+export default [
+  {
+    ignores: [
+      ".next/**",
+      "node_modules/**",
+      "dist/**",
+      "build/**",
+      "next-env.d.ts",
+    ],
+  },
+
   ...compat.extends("next/core-web-vitals", "next/typescript"),
+
   {
     plugins: {
       "simple-import-sort": simpleImportSort,
@@ -22,5 +33,3 @@ const eslintConfig = [
     },
   },
 ];
-
-export default eslintConfig;

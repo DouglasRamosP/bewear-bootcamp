@@ -2,13 +2,12 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { PatternFormat } from "react-number-format";
 import { toast } from "sonner";
 import z from "zod";
 
-import { getCart } from "@/actions/get-cart";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -25,7 +24,6 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { shippingAddressTable } from "@/db/schema";
 import { useCreateShippingAddress } from "@/hooks/mutations/use-create-shipping-address";
 import { useUpdateCartShippingAddress } from "@/hooks/mutations/use-update-cart-shipping-address";
-import { useCart } from "@/hooks/queries/use-cart";
 import { useUserAddresses } from "@/hooks/queries/use-user-addresses";
 
 import { formatAddress } from "../../helpers/address";
@@ -116,7 +114,7 @@ const Addresses = ({
   };
 
   return (
-    <Card>
+    <Card className="w-full">
       <CardHeader>
         <CardTitle>Identificação</CardTitle>
       </CardHeader>
@@ -139,9 +137,9 @@ const Addresses = ({
             )}
 
             {addresses?.map((address) => (
-              <Card key={address.id}>
-                <CardContent>
-                  <div className="flex items-start space-x-2">
+              <Card key={address.id} className="w-full">
+                <CardContent className="p-4">
+                  <div className="flex items-start gap-3">
                     <RadioGroupItem value={address.id} id={address.id} />
                     <div className="flex-1">
                       <Label htmlFor={address.id} className="cursor-pointer">
@@ -155,8 +153,8 @@ const Addresses = ({
               </Card>
             ))}
 
-            <Card>
-              <CardContent>
+            <Card className="w-full">
+              <CardContent className="p-4">
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="add_new" id="add_new" />
                   <Label htmlFor="add_new">Adicionar novo endereço</Label>
@@ -191,7 +189,7 @@ const Addresses = ({
                   control={form.control}
                   name="email"
                   render={({ field }) => (
-                    <FormItem>
+                    <FormItem className="md:col-span-2">
                       <FormLabel>Email</FormLabel>
                       <FormControl>
                         <Input placeholder="Digite seu email" {...field} />
@@ -205,7 +203,7 @@ const Addresses = ({
                   control={form.control}
                   name="fullName"
                   render={({ field }) => (
-                    <FormItem>
+                    <FormItem className="md:col-span-2">
                       <FormLabel>Nome completo</FormLabel>
                       <FormControl>
                         <Input
@@ -279,7 +277,7 @@ const Addresses = ({
                   control={form.control}
                   name="address"
                   render={({ field }) => (
-                    <FormItem>
+                    <FormItem className="md:col-span-2">
                       <FormLabel>Endereço</FormLabel>
                       <FormControl>
                         <Input placeholder="Digite seu endereço" {...field} />

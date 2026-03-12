@@ -27,9 +27,14 @@ const CategoryPage = async ({ params }: CategoryPageProps) => {
   return (
     <>
       <Header />
-      <div className="space-y-6 px-5">
-        <h2 className="text-xl font-semibold">{category.name}</h2>
-        <div className="grid grid-cols-2 gap-4">
+      <main className="mx-auto w-full max-w-7xl space-y-6 px-4 py-6 sm:px-5 lg:px-8 lg:py-8 xl:space-y-8">
+        <div className="flex items-center justify-between gap-4">
+          <h2 className="text-xl font-semibold xl:text-2xl">{category.name}</h2>
+          <p className="text-muted-foreground hidden text-sm xl:block">
+            {products.length} produto{products.length === 1 ? "" : "s"}
+          </p>
+        </div>
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:gap-6 2xl:grid-cols-5">
           {products.map((product) => (
             <ProductItem
               key={product.id}
@@ -38,7 +43,7 @@ const CategoryPage = async ({ params }: CategoryPageProps) => {
             />
           ))}
         </div>
-      </div>
+      </main>
     </>
   );
 };

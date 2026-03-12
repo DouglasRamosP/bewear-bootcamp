@@ -14,27 +14,28 @@ interface ProductItemProps {
 
 const ProductItem = ({ product, textContainerClassName }: ProductItemProps) => {
   const firstVariant = product.variants[0];
+
   return (
     <Link
       href={`/product-variant/${firstVariant.slug}`}
-      className="flex flex-col gap-4"
+      className="flex min-w-[160px] max-w-[220px] flex-col gap-4 sm:min-w-[190px] sm:max-w-[240px] xl:min-w-0 xl:max-w-none"
     >
       <Image
         src={firstVariant.imageUrl}
         alt={firstVariant.name}
-        sizes="100vw"
+        sizes="(max-width: 640px) 45vw, (max-width: 1024px) 28vw, (max-width: 1279px) 240px, 20vw"
         height={0}
         width={0}
-        className="h-auto w-full rounded-3xl"
+        className="aspect-[3/4] h-auto w-full rounded-3xl object-cover"
       />
       <div
         className={cn(
-          "flex max-w-[200px] flex-col gap-1",
+          "flex w-full min-w-0 flex-col gap-1",
           textContainerClassName,
         )}
       >
         <p className="truncate text-sm font-medium">{product.name}</p>
-        <p className="text-muted-foreground truncate text-xs font-medium">
+        <p className="text-muted-foreground line-clamp-2 text-xs font-medium">
           {product.description}
         </p>
         <p className="truncate text-sm font-semibold">

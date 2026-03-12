@@ -40,48 +40,54 @@ const ProductVariantPage = async ({ params }: ProductVariantPageProps) => {
   return (
     <>
       <Header />
-      <div className="flex flex-col space-y-6">
-        <Image
-          src={productVariant.imageUrl}
-          alt={productVariant.name}
-          sizes="100vw"
-          height={0}
-          width={0}
-          className="h-auto w-full object-cover"
-        />
 
-        <div className="px-5">
-          <VariantSelector
-            selectedVariantSlug={productVariant.slug}
-            variants={productVariant.product.variants}
-          />
-        </div>
+      <main className="mx-auto flex w-full max-w-7xl flex-col gap-8 py-6 lg:gap-10 lg:py-8 xl:gap-12">
+        <section className="grid gap-6 lg:grid-cols-[minmax(0,520px)_minmax(0,1fr)] xl:grid-cols-[minmax(0,600px)_minmax(420px,1fr)] lg:items-start lg:px-8 xl:gap-10">
+          <div className="px-4 sm:px-5 lg:px-0">
+            <Image
+              src={productVariant.imageUrl}
+              alt={productVariant.name}
+              sizes="(max-width: 1024px) 100vw, (max-width: 1280px) 520px, 600px"
+              height={0}
+              width={0}
+              className="aspect-[4/5] h-auto w-full rounded-3xl object-cover"
+            />
+          </div>
 
-        <div className="px-5">
-          {/* DESCRIÇÃO */}
-          <h2 className="text-lg font-semibold">
-            {productVariant.product.name}
-          </h2>
-          <h3 className="text-muted-foreground text-sm">
-            {productVariant.name}
-          </h3>
-          <h3 className="text-lg font-semibold">
-            {formatCentsToBRL(productVariant.priceInCents)}
-          </h3>
-        </div>
+          <div className="flex flex-col gap-6 lg:pr-2 xl:max-w-[520px]">
+            <div className="px-4 sm:px-5 lg:px-0">
+              <VariantSelector
+                selectedVariantSlug={productVariant.slug}
+                variants={productVariant.product.variants}
+              />
+            </div>
 
-        <ProductActions productVariantId={productVariant.id} />
+            <div className="space-y-1 px-4 sm:px-5 lg:px-0">
+              <h2 className="text-lg font-semibold sm:text-2xl xl:text-3xl">
+                {productVariant.product.name}
+              </h2>
+              <h3 className="text-muted-foreground text-sm sm:text-base xl:text-lg">
+                {productVariant.name}
+              </h3>
+              <h3 className="text-lg font-semibold sm:text-2xl xl:text-3xl">
+                {formatCentsToBRL(productVariant.priceInCents)}
+              </h3>
+            </div>
 
-        <div className="px-5">
-          <p className="text-shadow-amber-600">
-            {productVariant.product.description}
-          </p>
-        </div>
+            <ProductActions productVariantId={productVariant.id} />
+
+            <div className="px-4 sm:px-5 lg:px-0 xl:max-w-[48ch]">
+              <p className="text-sm leading-6 sm:text-base xl:text-[15px]">
+                {productVariant.product.description}
+              </p>
+            </div>
+          </div>
+        </section>
 
         <ProductList title="Talvez você goste" products={likelyProducts} />
+      </main>
 
-        <Footer />
-      </div>
+      <Footer />
     </>
   );
 };

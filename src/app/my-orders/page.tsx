@@ -34,7 +34,7 @@ const MyOrdersPage = async () => {
   return (
     <>
       <Header />
-      <div className="px-5">
+      <main className="mx-auto w-full max-w-6xl px-4 py-6 sm:px-5 lg:px-8 lg:py-8">
         <Orders
           orders={orders.map((order) => ({
             id: order.id,
@@ -51,7 +51,7 @@ const MyOrdersPage = async () => {
             })),
           }))}
         />
-      </div>
+      </main>
     </>
   );
 };

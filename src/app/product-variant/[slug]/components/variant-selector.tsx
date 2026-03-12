@@ -13,15 +13,15 @@ const VariantSelector = ({
   variants,
 }: VariantSelectorProps) => {
   return (
-    <div className="flex items-center gap-4">
+    <div className="flex gap-4 overflow-x-auto pb-1 [&::-webkit-scrollbar]:hidden">
       {variants.map((variant) => (
         <Link
           href={`/product-variant/${variant.slug}`}
           key={variant.id}
           className={
             selectedVariantSlug === variant.slug
-              ? "border-primary rounded-xl border-2"
-              : ""
+              ? "border-primary shrink-0 rounded-xl border-2"
+              : "shrink-0 rounded-xl border-2 border-transparent"
           }
         >
           <Image
@@ -29,7 +29,7 @@ const VariantSelector = ({
             height={68}
             src={variant.imageUrl}
             alt={variant.name}
-            className="rounded-xl"
+            className="rounded-xl object-cover"
           />
         </Link>
       ))}

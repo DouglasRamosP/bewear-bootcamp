@@ -27,15 +27,15 @@ export const Cart = () => {
           <ShoppingBasketIcon />
         </Button>
       </SheetTrigger>
-      <SheetContent>
+      <SheetContent className="w-full max-w-md sm:max-w-lg xl:max-w-xl">
         <SheetHeader>
           <SheetTitle>Carrinho</SheetTitle>
         </SheetHeader>
 
-        <div className="flex h-full flex-col px-5 pb-5">
-          <div className="flex h-full max-h-full flex-col overflow-hidden">
+        <div className="flex h-full flex-col px-1 pb-5 sm:px-2 xl:px-3">
+          <div className="flex h-full min-h-0 flex-col overflow-hidden">
             <ScrollArea className="h-full">
-              <div className="flex h-full flex-col gap-8">
+              <div className="flex flex-col gap-6 pr-3">
                 {cart?.items.map((item) => (
                   <CartItem
                     key={item.id}
@@ -55,29 +55,29 @@ export const Cart = () => {
           </div>
 
           {cart?.items && cart?.items.length > 0 && (
-            <div className="flex flex-col gap-4">
+            <div className="mt-4 flex flex-col gap-4">
               <Separator />
 
-              <div className="flex items-center justify-between text-xs font-medium">
+              <div className="flex items-center justify-between text-xs font-medium sm:text-sm">
                 <p>Subtotal</p>
                 <p>{formatCentsToBRL(cart?.totalPriceInCents ?? 0)}</p>
               </div>
 
               <Separator />
 
-              <div className="flex items-center justify-between text-xs font-medium">
+              <div className="flex items-center justify-between text-xs font-medium sm:text-sm">
                 <p>Entrega</p>
                 <p>GRÁTIS</p>
               </div>
 
               <Separator />
 
-              <div className="flex items-center justify-between text-xs font-medium">
+              <div className="flex items-center justify-between text-xs font-medium sm:text-sm">
                 <p>Total</p>
                 <p>{formatCentsToBRL(cart?.totalPriceInCents ?? 0)}</p>
               </div>
 
-              <Button className="mt-5 rounded-full" asChild>
+              <Button className="mt-2 rounded-full" asChild>
                 <Link href="/cart/identification">Finalizar compra</Link>
               </Button>
             </div>
@@ -87,5 +87,3 @@ export const Cart = () => {
     </Sheet>
   );
 };
-
-// SERVER ACTION
