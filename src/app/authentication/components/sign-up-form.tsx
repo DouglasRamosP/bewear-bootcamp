@@ -1,6 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Loader2Icon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -33,15 +34,10 @@ const formSchema = z
     password: z.string("Senha inválida.").min(8, "Senha inválida."),
     passwordConfirmation: z.string("Senha inválida.").min(8, "Senha inválida."),
   })
-  .refine(
-    (data) => {
-      return data.password === data.passwordConfirmation;
-    },
-    {
-      error: "As senhas não coincidem.",
-      path: ["passwordConfirmation"],
-    },
-  );
+  .refine((data) => data.password === data.passwordConfirmation, {
+    error: "As senhas não coincidem.",
+    path: ["passwordConfirmation"],
+  });
 
 type FormValues = z.infer<typeof formSchema>;
 
@@ -80,15 +76,15 @@ const SignUpForm = () => {
   }
 
   return (
-    <Card className="w-full">
-      <CardHeader>
+    <Card className="border-0 bg-transparent shadow-none">
+      <CardHeader className="px-3 sm:px-4">
         <CardTitle>Criar conta</CardTitle>
         <CardDescription>Crie uma conta para continuar.</CardDescription>
       </CardHeader>
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-          <CardContent className="grid w-full gap-6">
+          <CardContent className="grid w-full gap-6 px-3 sm:px-4">
             <FormField
               control={form.control}
               name="name"
@@ -96,7 +92,11 @@ const SignUpForm = () => {
                 <FormItem>
                   <FormLabel>Nome</FormLabel>
                   <FormControl>
-                    <Input placeholder="Digite seu nome" {...field} />
+                    <Input
+                      placeholder="Digite seu nome"
+                      className="h-12 rounded-2xl"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -109,7 +109,11 @@ const SignUpForm = () => {
                 <FormItem>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input placeholder="Digite seu email" {...field} />
+                    <Input
+                      placeholder="você@exemplo.com"
+                      className="h-12 rounded-2xl"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -125,6 +129,7 @@ const SignUpForm = () => {
                     <Input
                       placeholder="Digite sua senha"
                       type="password"
+                      className="h-12 rounded-2xl"
                       {...field}
                     />
                   </FormControl>
@@ -142,6 +147,7 @@ const SignUpForm = () => {
                     <Input
                       placeholder="Digite a sua senha novamente"
                       type="password"
+                      className="h-12 rounded-2xl"
                       {...field}
                     />
                   </FormControl>
@@ -150,8 +156,11 @@ const SignUpForm = () => {
               )}
             />
           </CardContent>
-          <CardFooter>
-            <Button type="submit" className="w-full">
+          <CardFooter className="px-3 sm:px-4">
+            <Button type="submit" className="w-full rounded-full">
+              {form.formState.isSubmitting && (
+                <Loader2Icon className="size-4 animate-spin" />
+              )}
               Criar conta
             </Button>
           </CardFooter>

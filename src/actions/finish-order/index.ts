@@ -1,16 +1,10 @@
 "use server";
 
 import { eq } from "drizzle-orm";
-import { revalidatePath } from "next/cache";
 import { headers } from "next/headers";
 
 import { db } from "@/db";
-import {
-  cartItemTable,
-  cartTable,
-  orderItemTable,
-  orderTable,
-} from "@/db/schema";
+import { cartTable, orderItemTable, orderTable } from "@/db/schema";
 import { auth } from "@/lib/auth";
 
 export const finishOrder = async () => {
@@ -80,7 +74,6 @@ export const finishOrder = async () => {
       }));
     await tx.insert(orderItemTable).values(orderItemsPayload);
     await tx.delete(cartTable).where(eq(cartTable.id, cart.id));
-    await tx.delete(cartItemTable).where(eq(cartItemTable.cartId, cart.id));
   });
   if (!orderId) {
     throw new Error("Failed to create order");

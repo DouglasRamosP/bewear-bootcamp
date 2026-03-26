@@ -8,7 +8,11 @@ export const formatAddress = (address: {
   state: string;
   zipCode: string;
 }) => {
-  return `${address.recipientName} • ${address.street}, ${address.number}
-    ${address.complement && `, ${address.complement}`}, ${address.neighborhood}
-    , ${address.city} - ${address.state} • CEP: ${address.zipCode}`;
+  const complement = address.complement ? `, ${address.complement}` : "";
+
+  return [
+    `${address.recipientName} • ${address.street}, ${address.number}${complement}`,
+    `${address.neighborhood} • ${address.city} - ${address.state}`,
+    `CEP: ${address.zipCode}`,
+  ].join(" ");
 };

@@ -5,33 +5,43 @@ const BrandList = () => {
     { name: "Nike", logo: "/nike.png" },
     { name: "Adidas", logo: "/adidas.png" },
     { name: "Puma", logo: "/puma.png" },
-    { name: "Adidas2", logo: "/adidas.png" },
-    { name: "Puma2", logo: "/puma.png" },
-    { name: "Adidas3", logo: "/adidas.png" },
+    { name: "New Balance", logo: "/newbalance.png" },
   ];
 
   return (
-    <div className="space-y-4">
-      <h3 className="px-5 font-semibold">Marcas parceiras</h3>
-      <div className="flex gap-4 overflow-x-auto px-5 [&::-webkit-scrollbar]:hidden">
-        {brands.map((brand) => (
-          <div
-            key={brand.name}
-            className="flex min-w-[64px] flex-col items-center"
-          >
-            <div className="flex h-16 w-16 items-center justify-center">
-              <Image
-                src={brand.logo}
-                alt={brand.name}
-                width={200}
-                height={200}
-              />
+    <section className="space-y-4">
+      <div className="px-4 sm:px-5 lg:px-8">
+        <div className="surface-panel rounded-[2rem] px-5 py-5 sm:px-6">
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+            <div>
+              <p className="text-muted-foreground text-[11px] font-semibold tracking-[0.2em] uppercase">
+                Labels selecionadas
+              </p>
+              <h3 className="mt-2 text-xl font-semibold tracking-tight">
+                Marcas que reforcam a curadoria da casa
+              </h3>
             </div>
-            <span className="mt-1 text-sm">{brand.name}</span>
+
+            <div className="flex gap-4 overflow-x-auto pb-1 [&::-webkit-scrollbar]:hidden">
+              {brands.map((brand) => (
+                <div
+                  key={brand.name}
+                  className="border-border/70 bg-background/70 flex min-w-[130px] items-center justify-center rounded-[1.5rem] border px-6 py-4"
+                >
+                  <Image
+                    src={brand.logo}
+                    alt={brand.name}
+                    width={120}
+                    height={40}
+                    className="h-8 w-auto object-contain opacity-80"
+                  />
+                </div>
+              ))}
+            </div>
           </div>
-        ))}
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 

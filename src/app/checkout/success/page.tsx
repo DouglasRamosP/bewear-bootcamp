@@ -1,40 +1,34 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
 
+import Footer from "@/components/common/footer";
 import { Header } from "@/components/common/header";
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogTitle,
-} from "@/components/ui/dialog";
 
 const CheckoutSuccessPage = () => {
   return (
     <>
       <Header />
-      <Dialog open={true} onOpenChange={() => {}}>
-        <DialogContent className="text-center">
+      <main className="mx-auto flex w-full max-w-5xl flex-col gap-6 px-4 py-8 sm:px-5 lg:px-8 lg:py-12">
+        <section className="surface-panel flex flex-col items-center rounded-[2rem] px-6 py-10 text-center sm:px-10 lg:py-14">
           <Image
             src="/illustration.svg"
-            alt="Success"
+            alt="Pedido concluído"
             width={300}
             height={300}
             className="mx-auto"
           />
-          <DialogTitle className="mt-4 text-2xl">Pedido efetuado!</DialogTitle>
-          <DialogDescription className="font-medium">
+          <h1 className="mt-6 text-3xl font-semibold tracking-tight sm:text-4xl">
+            Pedido efetuado com sucesso
+          </h1>
+          <p className="text-muted-foreground mt-3 max-w-2xl text-base leading-7 font-medium">
             Seu pedido foi efetuado com sucesso. Você pode acompanhar o status
-            na seção de “Meus Pedidos”.
-          </DialogDescription>
+            na seção de Meus Pedidos.
+          </p>
 
-          <DialogFooter>
-            <Button className="rounded-full" size="lg">
-              Ver meus pedidos
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <Button className="rounded-full" size="lg" asChild>
+              <Link href="/my-orders">Ver meus pedidos</Link>
             </Button>
             <Button
               className="rounded-full"
@@ -44,9 +38,10 @@ const CheckoutSuccessPage = () => {
             >
               <Link href="/">Voltar para a loja</Link>
             </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+          </div>
+        </section>
+      </main>
+      <Footer />
     </>
   );
 };

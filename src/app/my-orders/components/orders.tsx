@@ -32,10 +32,27 @@ interface OrdersProps {
 }
 
 const Orders = ({ orders }: OrdersProps) => {
+  if (orders.length === 0) {
+    return (
+      <Card className="surface-panel border-border/60 rounded-[2rem] py-5">
+        <CardContent className="flex flex-col items-center gap-3 py-10 text-center">
+          <p className="text-xl font-semibold">Nenhum pedido por aqui ainda</p>
+          <p className="text-muted-foreground max-w-md text-sm leading-6">
+            Assim que uma compra for finalizada, ela aparecerá aqui com status e
+            detalhes completos.
+          </p>
+        </CardContent>
+      </Card>
+    );
+  }
+
   return (
     <div className="space-y-5">
       {orders.map((order) => (
-        <Card key={order.id}>
+        <Card
+          key={order.id}
+          className="surface-panel border-border/60 rounded-[2rem] py-5"
+        >
           <CardContent>
             <Accordion type="single" collapsible key={order.id}>
               <AccordionItem value="item-1">
@@ -49,7 +66,8 @@ const Orders = ({ orders }: OrdersProps) => {
                       <Badge variant="destructive">Cancelado</Badge>
                     )}
                     <p className="text-sm leading-5">
-                      Pedido feito em {new Date(order.createdAt).toLocaleDateString("pt-BR")} às{" "}
+                      Pedido feito em{" "}
+                      {new Date(order.createdAt).toLocaleDateString("pt-BR")} às{" "}
                       {new Date(order.createdAt).toLocaleTimeString("pt-BR", {
                         hour: "2-digit",
                         minute: "2-digit",
@@ -70,7 +88,7 @@ const Orders = ({ orders }: OrdersProps) => {
                             alt={product.productName}
                             width={78}
                             height={78}
-                            className="h-[78px] w-[78px] shrink-0 rounded-lg object-cover"
+                            className="h-[78px] w-[78px] shrink-0 rounded-[1rem] object-cover"
                           />
                           <div className="min-w-0">
                             <p className="truncate text-sm font-semibold">
@@ -94,7 +112,7 @@ const Orders = ({ orders }: OrdersProps) => {
                   <div className="py-5">
                     <Separator />
                   </div>
-                  <div className="space-y-2 xl:max-w-sm xl:ml-auto">
+                  <div className="space-y-2 xl:ml-auto xl:max-w-sm">
                     <div className="flex justify-between gap-4">
                       <p className="text-sm">Subtotal</p>
                       <p className="text-muted-foreground text-sm font-medium">

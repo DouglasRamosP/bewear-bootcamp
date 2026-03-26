@@ -46,16 +46,31 @@ const ConfirmationPage = async () => {
   return (
     <div>
       <Header />
-      <main className="mx-auto w-full max-w-7xl px-4 py-6 sm:px-5 lg:px-8 lg:py-8">
-        <div className="grid gap-4 xl:gap-8 lg:grid-cols-[minmax(0,1.45fr)_minmax(340px,420px)] lg:items-start">
-          <Card>
+      <main className="mx-auto w-full max-w-7xl space-y-6 px-4 py-6 sm:px-5 lg:px-8 lg:py-8">
+        <section className="surface-panel rounded-[2rem] p-6 sm:p-8">
+          <p className="text-muted-foreground text-[11px] font-semibold tracking-[0.2em] uppercase">
+            Confirmação
+          </p>
+          <h1 className="mt-3 text-3xl font-semibold tracking-tight">
+            Revise os dados antes do pagamento
+          </h1>
+          <p className="text-muted-foreground mt-3 max-w-2xl text-sm leading-6 sm:text-base">
+            Aqui a jornada ganha acabamento profissional e preserva o mesmo
+            fluxo já integrado ao Stripe.
+          </p>
+        </section>
+
+        <div className="grid gap-4 lg:grid-cols-[minmax(0,1.45fr)_minmax(340px,420px)] lg:items-start xl:gap-8">
+          <Card className="surface-panel border-border/60 rounded-[2rem] py-5">
             <CardHeader>
-              <CardTitle>Identificação</CardTitle>
+              <CardTitle>Endereço confirmado</CardTitle>
             </CardHeader>
             <CardContent className="space-y-6">
-              <Card>
-                <CardContent>
-                  <p className="text-sm leading-6">{formatAddress(cart.shippingAddress)}</p>
+              <Card className="border-border/60 bg-background/70 rounded-[1.5rem] py-0">
+                <CardContent className="p-5">
+                  <p className="text-sm leading-6">
+                    {formatAddress(cart.shippingAddress)}
+                  </p>
                 </CardContent>
               </Card>
               <FinishOrderButton />
@@ -75,9 +90,7 @@ const ConfirmationPage = async () => {
           />
         </div>
       </main>
-      <div className="mt-12">
-        <Footer />
-      </div>
+      <Footer />
     </div>
   );
 };

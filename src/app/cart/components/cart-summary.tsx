@@ -23,7 +23,7 @@ const CartSummary = ({
   products,
 }: CartSummaryProps) => {
   return (
-    <Card className="h-fit lg:sticky lg:top-6">
+    <Card className="surface-panel border-border/60 h-fit rounded-[2rem] py-5 lg:sticky lg:top-28">
       <CardHeader>
         <CardTitle>Resumo</CardTitle>
       </CardHeader>
@@ -52,28 +52,32 @@ const CartSummary = ({
         <div className="space-y-4">
           {products.map((product) => (
             <div
-              className="flex items-start justify-between gap-3 xl:gap-4"
+              className="border-border/60 bg-background/70 rounded-[1.5rem] border p-3"
               key={product.id}
             >
-              <div className="flex min-w-0 items-center gap-3 sm:gap-4">
-                <Image
-                  src={product.imageUrl}
-                  alt={product.name}
-                  width={78}
-                  height={78}
-                  className="h-[78px] w-[78px] shrink-0 rounded-lg object-cover"
-                />
-                <div className="min-w-0">
-                  <p className="truncate text-sm font-semibold">{product.name}</p>
-                  <p className="text-muted-foreground truncate text-xs font-medium">
-                    {product.variantName} x {product.quantity}
+              <div className="flex items-start justify-between gap-3 xl:gap-4">
+                <div className="flex min-w-0 items-center gap-3 sm:gap-4">
+                  <Image
+                    src={product.imageUrl}
+                    alt={product.name}
+                    width={78}
+                    height={78}
+                    className="h-[78px] w-[78px] shrink-0 rounded-[1rem] object-cover"
+                  />
+                  <div className="min-w-0">
+                    <p className="truncate text-sm font-semibold">
+                      {product.name}
+                    </p>
+                    <p className="text-muted-foreground truncate text-xs font-medium">
+                      {product.variantName} x {product.quantity}
+                    </p>
+                  </div>
+                </div>
+                <div className="shrink-0 text-right">
+                  <p className="text-sm font-bold">
+                    {formatCentsToBRL(product.priceInCents * product.quantity)}
                   </p>
                 </div>
-              </div>
-              <div className="shrink-0 text-right">
-                <p className="text-sm font-bold">
-                  {formatCentsToBRL(product.priceInCents * product.quantity)}
-                </p>
               </div>
             </div>
           ))}

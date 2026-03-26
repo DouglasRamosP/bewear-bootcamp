@@ -6,16 +6,41 @@ import ProductItem from "./product-item";
 
 interface ProductListProps {
   title: string;
+  description?: string;
+  id?: string;
   products: (typeof productTable.$inferSelect & {
     variants: (typeof productVariantTable.$inferSelect)[];
   })[];
 }
 
-const ProductList = ({ title, products }: ProductListProps) => {
+const ProductList = ({
+  title,
+  description,
+  id,
+  products,
+}: ProductListProps) => {
   return (
-    <section className="space-y-4 sm:space-y-6">
+    <section id={id} className="space-y-4 sm:space-y-6">
       <div className="px-4 sm:px-5 lg:px-8">
-        <h3 className="font-semibold">{title}</h3>
+        <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
+          <div className="space-y-2">
+            <p className="text-muted-foreground text-[11px] font-semibold tracking-[0.2em] uppercase">
+              Curadoria
+            </p>
+            <h3 className="text-2xl font-semibold tracking-tight sm:text-3xl">
+              {title}
+            </h3>
+            {description && (
+              <p className="text-muted-foreground max-w-2xl text-sm leading-6 sm:text-base">
+                {description}
+              </p>
+            )}
+          </div>
+
+          <p className="text-muted-foreground text-sm font-medium">
+            {products.length} itens em destaque
+          </p>
+        </div>
       </div>
 
       <div className="hidden px-4 xl:block xl:px-8">

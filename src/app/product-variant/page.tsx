@@ -1,9 +1,7 @@
+import { redirect } from "next/navigation";
+
 const Product = () => {
-  return (
-    <div>
-      <h1>Product</h1>
-    </div>
-  );
+  redirect("/");
 };
 
 export default Product;

@@ -55,7 +55,7 @@ const Addresses = ({
 }: AddressesProps) => {
   const router = useRouter();
   const [selectedAddress, setSelectedAddress] = useState<string | null>(
-    defaultShippingAddressId || null,
+    defaultShippingAddressId || shippingAddresses[0]?.id || "add_new",
   );
   const createShippingAddressMutation = useCreateShippingAddress();
   const updateCartShippingAddressMutation = useUpdateCartShippingAddress();
@@ -114,7 +114,7 @@ const Addresses = ({
   };
 
   return (
-    <Card className="w-full">
+    <Card className="surface-panel border-border/60 w-full rounded-[2rem] py-5">
       <CardHeader>
         <CardTitle>Identificação</CardTitle>
       </CardHeader>
@@ -137,15 +137,18 @@ const Addresses = ({
             )}
 
             {addresses?.map((address) => (
-              <Card key={address.id} className="w-full">
+              <Card
+                key={address.id}
+                className="border-border/60 bg-background/70 mb-3 w-full rounded-[1.5rem] py-0"
+              >
                 <CardContent className="p-4">
                   <div className="flex items-start gap-3">
                     <RadioGroupItem value={address.id} id={address.id} />
                     <div className="flex-1">
                       <Label htmlFor={address.id} className="cursor-pointer">
-                        <div>
-                          <p className="text-sm">{formatAddress(address)}</p>
-                        </div>
+                        <p className="text-sm leading-6">
+                          {formatAddress(address)}
+                        </p>
                       </Label>
                     </div>
                   </div>
@@ -153,7 +156,7 @@ const Addresses = ({
               </Card>
             ))}
 
-            <Card className="w-full">
+            <Card className="border-border/60 bg-background/70 w-full rounded-[1.5rem] py-0">
               <CardContent className="p-4">
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="add_new" id="add_new" />
@@ -168,7 +171,7 @@ const Addresses = ({
           <div className="mt-4">
             <Button
               onClick={handleGoToPayment}
-              className="w-full"
+              className="w-full rounded-full"
               disabled={updateCartShippingAddressMutation.isPending}
             >
               {updateCartShippingAddressMutation.isPending
@@ -192,7 +195,11 @@ const Addresses = ({
                     <FormItem className="md:col-span-2">
                       <FormLabel>Email</FormLabel>
                       <FormControl>
-                        <Input placeholder="Digite seu email" {...field} />
+                        <Input
+                          placeholder="você@exemplo.com"
+                          className="h-12 rounded-2xl"
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -208,6 +215,7 @@ const Addresses = ({
                       <FormControl>
                         <Input
                           placeholder="Digite seu nome completo"
+                          className="h-12 rounded-2xl"
                           {...field}
                         />
                       </FormControl>
@@ -227,6 +235,7 @@ const Addresses = ({
                           format="###.###.###-##"
                           placeholder="000.000.000-00"
                           customInput={Input}
+                          className="h-12 rounded-2xl"
                           {...field}
                         />
                       </FormControl>
@@ -246,6 +255,7 @@ const Addresses = ({
                           format="(##) #####-####"
                           placeholder="(11) 99999-9999"
                           customInput={Input}
+                          className="h-12 rounded-2xl"
                           {...field}
                         />
                       </FormControl>
@@ -265,6 +275,7 @@ const Addresses = ({
                           format="#####-###"
                           placeholder="00000-000"
                           customInput={Input}
+                          className="h-12 rounded-2xl"
                           {...field}
                         />
                       </FormControl>
@@ -280,7 +291,11 @@ const Addresses = ({
                     <FormItem className="md:col-span-2">
                       <FormLabel>Endereço</FormLabel>
                       <FormControl>
-                        <Input placeholder="Digite seu endereço" {...field} />
+                        <Input
+                          placeholder="Digite seu endereço"
+                          className="h-12 rounded-2xl"
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -294,7 +309,11 @@ const Addresses = ({
                     <FormItem>
                       <FormLabel>Número</FormLabel>
                       <FormControl>
-                        <Input placeholder="Digite o número" {...field} />
+                        <Input
+                          placeholder="Digite o número"
+                          className="h-12 rounded-2xl"
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -310,6 +329,7 @@ const Addresses = ({
                       <FormControl>
                         <Input
                           placeholder="Apto, bloco, etc. (opcional)"
+                          className="h-12 rounded-2xl"
                           {...field}
                         />
                       </FormControl>
@@ -325,7 +345,11 @@ const Addresses = ({
                     <FormItem>
                       <FormLabel>Bairro</FormLabel>
                       <FormControl>
-                        <Input placeholder="Digite o bairro" {...field} />
+                        <Input
+                          placeholder="Digite o bairro"
+                          className="h-12 rounded-2xl"
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -339,7 +363,11 @@ const Addresses = ({
                     <FormItem>
                       <FormLabel>Cidade</FormLabel>
                       <FormControl>
-                        <Input placeholder="Digite a cidade" {...field} />
+                        <Input
+                          placeholder="Digite a cidade"
+                          className="h-12 rounded-2xl"
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -353,7 +381,11 @@ const Addresses = ({
                     <FormItem>
                       <FormLabel>Estado</FormLabel>
                       <FormControl>
-                        <Input placeholder="Digite o estado" {...field} />
+                        <Input
+                          placeholder="Digite o estado"
+                          className="h-12 rounded-2xl"
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -363,7 +395,7 @@ const Addresses = ({
 
               <Button
                 type="submit"
-                className="w-full"
+                className="w-full rounded-full"
                 disabled={
                   createShippingAddressMutation.isPending ||
                   updateCartShippingAddressMutation.isPending

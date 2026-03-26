@@ -5,12 +5,7 @@ import { headers } from "next/headers";
 import Stripe from "stripe";
 
 import { db } from "@/db";
-import {
-  cartItemTable,
-  cartTable,
-  orderItemTable,
-  orderTable,
-} from "@/db/schema";
+import { orderItemTable, orderTable } from "@/db/schema";
 import { auth } from "@/lib/auth";
 
 import {
@@ -46,6 +41,9 @@ export const createCheckoutSession = async (
       productVariant: { with: { product: true } },
     },
   });
+  if (orderItems.length === 0) {
+    throw new Error("Order items not found");
+  }
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
   const checkoutSession = await stripe.checkout.sessions.create({
     payment_method_types: ["card"],
